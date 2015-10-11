@@ -47,7 +47,9 @@ define(['babel'],function(babel){
 		},
 		write:function(pluginName, moduleName, write){
 			if(_buildMap.hasOwnProperty(moduleName)){
-				write(_buildMap[moduleName]);
+
+				// use method asModule to get rid of MISMATCHED ANONYMOUS DEFINE() MODULES error....
+				write.asModule(pluginName + '!' + moduleName, _buildMap[moduleName]);
 				delete _buildMap[moduleName];
 			}
 		}
